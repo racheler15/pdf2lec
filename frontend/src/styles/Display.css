@@ -1,0 +1,76 @@
+.display-container {
+  padding: 32px 0px;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 equal columns */
+  grid-template-rows: repeat(3, 1fr); /* 3 equal rows */
+}
+
+.grid-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0f0f0;
+  border: 1px solid #ddd;
+  height: 100px; /* Adjust the height of each grid item */
+  text-align: center;
+}
+
+.carousel-container {
+  width: 50vw;
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hover-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 45vw; /* Matches slide-viewer width */
+}
+
+.slide-viewer {
+  width: 100%; /* Takes the width of hover-container */
+  height: 50vh;
+  overflow: hidden;
+}
+
+.thumbnail-container {
+  background-color: #efefef;
+  padding: 6px 0px;
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 20px;
+  margin-top: 8px;
+  max-width: 50vw;
+}
+
+
+.thumbnail-container img {
+  cursor: pointer;
+  border: 1px solid gray;
+  box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+.thumbnail-container img.active {
+  border: 2px solid blue;
+}
+
+.audio-player {
+  position: absolute;
+  bottom: 10px;
+  width: 95%;
+  opacity: 0;
+  transition: opacity 0.3s;
+  height: 5vh;
+}
+
+.hover-container:hover .audio-player {
+  opacity: 1; /* Show audio player on hover over the slide */
+  cursor: pointer;
+}

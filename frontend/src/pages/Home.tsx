@@ -21,6 +21,8 @@ import "../styles/Home.css";
 import axios from "axios";
 // import { PDFViewer } from "@react-pdf/renderer";
 import PDFViewer from "../components/pdfViewer";
+import { useNavigate } from "react-router-dom";
+
 
 interface PDF {
   pdf: string;
@@ -33,20 +35,21 @@ const Home = () => {
   const [file, setFile] = useState<File | null>(null);
   const [allPDFS, setAllPDFS] = useState<PDF[]>([]);
   const [selectedPDF, setSelectedPDF] = useState<string | null>(null); // State to manage selected PDF
+  const navigate = useNavigate();
 
   useEffect(() => {
     getPDF();
   }, []);
 
-  let audio = new Audio("../../public/L6_Classification_slide1.mp3");
+  // let audio = new Audio("../../public/L6_Classification_slide1.mp3");
 
-  const playAudio = () => {
-    audio.play();
-  };
+  // const playAudio = () => {
+  //   audio.play();
+  // };
 
-  const pause = () => {
-    audio.pause();
-  };
+  // const pause = () => {
+  //   audio.pause();
+  // };
 
   const getPDF = async () => {
     const result = await axios.get("http://localhost:8080/get-files");
@@ -97,14 +100,17 @@ const Home = () => {
   };
 
   const showPDF = (pdf: string) => {
+    const url = `http://localhost:8080/files/${pdf}`;
     console.log(`http://localhost:8080/files/${pdf}`);
     setSelectedPDF(`http://localhost:8080/files/${pdf}`); // Update state to the selected PDF
+    navigate(`/pdf/${pdf}`);
   };
 
+  // Remove the PDF from the state
   const handleDelete = (pdfPath: string) => {
-    // Remove the PDF from the state
     setAllPDFS((prevPDFS) => prevPDFS.filter((data) => data.pdf !== pdfPath));
   };
+
   return (
     <div>
       <Box sx={{ display: "flex", paddingTop: "20px" }}>
@@ -226,7 +232,7 @@ const Home = () => {
           </Box>
 
           {/* Render the PDF viewer conditionally */}
-          <Box
+          {/* <Box
             sx={{
               display: "flex",
               flexDirection: "row",
@@ -244,7 +250,7 @@ const Home = () => {
                 <button onClick={pause} style ={{backgroundColor: "#8FD3F8"}}>Pause</button>
               </div>
             )}
-          </Box>
+          </Box> */}
         </Box>
       </Box>
     </div>
